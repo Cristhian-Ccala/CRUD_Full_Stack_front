@@ -1,0 +1,31 @@
+<h2 class="mb-5">
+  @if(customer) {
+    Editar Persona
+  } @else {
+    Nueva Persona
+  }
+</h2>
+
+<div class="row row-cols-2">
+@if(form) {
+  <form class="row g-3" [formGroup]="form" (ngSubmit)="save()">
+    <div class="col-md-6">
+      <label for="firstName">Nombre</label>
+      <input type="text" placeholder="Nombre" class="form-control" id="firstName" formControlName="firstName">
+    </div>
+    <div class="col-md-6">
+      <label for="lastName">Apellido</label>
+      <input type="text" placeholder="Apellido" class="form-control" id="lastName" formControlName="lastName">
+    </div>
+    <div class="col-12">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email" placeholder="ejemplo@gmail.com">
+    </div>
+
+    <div class="col-12">
+      <button class="btn btn-primary">@if(customer) {Actualizar} @else {Agregar Persona}</button>
+      <button type="button" class="btn btn-danger" routerLink="/">Cancelar</button>
+    </div>
+</form>
+}
+</div>

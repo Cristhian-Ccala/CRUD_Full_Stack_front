@@ -1,0 +1,56 @@
+<h2 class="mb-5">Personas</h2>
+
+<div class="text-rigth">
+    <button class="btn btn-primary" routerLink="/nuevo" role="button">Agregar Persona</button>
+    <br><br>
+    <form class="d-flex">
+        <input class="form-control me-2" type="search" name="searchTerm" [(ngModel)]="searchTerm" placeholder="Buscar persona" aria-label="Search" required>
+        <button class="btn btn-success" type="submit" role="button">Buscar</button>
+    </form>
+</div>
+
+<Table class="table table-hover">
+<thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Acciones</th>
+    </tr>
+</thead>
+<tbody>
+    @if(searchTerm){
+        @for (custom of customers; track custom.id){
+            @if (custom.firstName.toLowerCase().startsWith(searchTerm.toLowerCase()) || 
+            custom.lastName.toLowerCase().startsWith(searchTerm.toLowerCase()) || custom.id.toString() === searchTerm){
+                <tr>
+                    <td>{{ custom.id }}</td>
+                    <td>{{ custom.firstName }}</td>
+                    <td>{{ custom.lastName }}</td>
+                    <td>{{ custom.email }}</td>
+                    <td>
+                        <a class="btn btn-primary" [routerLink]="[custom.id, 'editar']" >Editar</a>
+                        <a class="btn btn-danger" (click)="deleteCustomer(custom)">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        }
+    } @else {
+        @for(custom of customers; track custom.id) {
+            <tr>
+                <td>{{ custom.id }}</td>
+                <td>{{ custom.firstName }}</td>
+                <td>{{ custom.lastName }}</td>
+                <td>{{ custom.email }}</td>
+                <td>
+                    <a class="btn btn-primary" [routerLink]="[custom.id, 'editar']" >Editar</a>
+                    <a class="btn btn-danger" (click)="deleteCustomer(custom)">Eliminar</a>
+                </td>
+            </tr>
+        }
+    }
+
+
+</tbody>
+</Table>
